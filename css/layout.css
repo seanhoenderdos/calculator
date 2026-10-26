@@ -19,25 +19,22 @@ body {
   border-radius: 16px;
   box-shadow: 0 8px 24px rgb(0 0 0 / 10%);
 }
+
+/* Arrange calculator sections vertically */
 .calc-layout {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.calc-number-pad {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
+/* Arrange number buttons in three columns */
 #number-pad {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 }
 
-.calc-number-pad button {
-  flex: 1 0 28%;
+#number-pad button {
   min-height: 48px;
   font-size: 1.2rem;
   cursor: pointer;
