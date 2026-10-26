@@ -1,1 +1,44 @@
-/* Nourhan: calculator layout and numeric keypad styling. Use calc- classes. */
+/* Center the calculator on the page */
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f3f5;
+}
+
+/* Calculator box */
+.calc-app {
+  width: 320px;
+  max-width: calc(100% - 32px);
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  border: 1px solid #dcdfe3;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 10%);
+}
+.calc-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.calc-number-pad {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+#number-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.calc-number-pad button {
+  flex: 1 0 28%;
+  min-height: 48px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
