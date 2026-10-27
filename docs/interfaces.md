@@ -1,8 +1,9 @@
 # Proposed calculator interfaces
 
-These conventions come from the team's proposal and should be reviewed together
-before implementation. The foundation reserves the files and documents the
-interfaces; the functions and UI elements have not been implemented yet.
+These conventions come from the team's proposal. The display and expression HTML
+is in place, and the controller implements state, digit entry and clear. The
+remaining controller functions and the input and math modules are still planned
+interfaces.
 
 ## HTML hooks
 
@@ -31,13 +32,34 @@ uses a different visual symbol. Calculator CSS classes use the `calc-` prefix.
 
 ### Sean: `js/calculator.js`
 
-Export the following controller functions:
+Implemented controller functions:
 
+- `getCalculatorState()` returns a copy of the current state.
 - `handleDigit(digit)`
+- `clearCalculator()`
+
+Both handlers return an updated state snapshot. The initial state, also restored
+by clear, is:
+
+```json
+{
+  "currentInput": "0",
+  "firstOperand": null,
+  "operator": null,
+  "waitingForNextOperand": false
+}
+```
+
+Digit entry accepts a single digit as a string or number, replaces the initial
+zero and ignores invalid input. Snapshots can be read or modified by callers
+without changing the controller's internal state. DOM updates will be connected
+during integration.
+
+Remaining planned controller functions:
+
 - `handleOperator(operator)`
 - `handleEquals()`
 - `handleDecimal()`
-- `clearCalculator()`
 - `backspace()`
 
 Own calculator state, operands, operators, chained calculations, equals, clear
