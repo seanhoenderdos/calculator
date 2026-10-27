@@ -12,6 +12,16 @@
   <body>
     <main class="calc-app">
       <div class="calc-layout">
+        <div class="calc-screen">
+          <p id="calculator-expression" class="calc-expression"></p>
+          <output
+            id="calculator-display"
+            class="calc-display"
+            aria-label="Current value"
+            >0</output
+          >
+        </div>
+
         <div id="number-pad" class="calc-number-pad">
           <button type="button" data-action="digit" data-value="7">7</button>
           <button type="button" data-action="digit" data-value="8">8</button>
@@ -30,7 +40,6 @@
         </div>
       </div>
 
-      <!-- Sean: calculator-display and calculator-expression elements. -->
       <!-- Nkheso: operator-pad container and operator/utility buttons. -->
     </main>
   </body>
