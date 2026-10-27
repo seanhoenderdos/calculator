@@ -11,29 +11,35 @@
   </head>
   <body>
     <main class="calc-app">
-     
-<div class="calc-layout">
-  
-  <div id="number-pad" class="calc-number-pad">
-    <button type="button" data-action="digit" data-value="7">7</button>
-    <button type="button" data-action="digit" data-value="8">8</button>
-    <button type="button" data-action="digit" data-value="9">9</button>
+      <div class="calc-layout">
+        <div class="calc-screen">
+          <p id="calculator-expression" class="calc-expression"></p>
+          <output
+            id="calculator-display"
+            class="calc-display"
+            aria-label="Current value"
+            >0</output
+          >
+        </div>
 
-    <button type="button" data-action="digit" data-value="4">4</button>
-    <button type="button" data-action="digit" data-value="5">5</button>
-    <button type="button" data-action="digit" data-value="6">6</button>
+        <div id="number-pad" class="calc-number-pad">
+          <button type="button" data-action="digit" data-value="7">7</button>
+          <button type="button" data-action="digit" data-value="8">8</button>
+          <button type="button" data-action="digit" data-value="9">9</button>
 
-    <button type="button" data-action="digit" data-value="1">1</button>
-    <button type="button" data-action="digit" data-value="2">2</button>
-    <button type="button" data-action="digit" data-value="3">3</button>
+          <button type="button" data-action="digit" data-value="4">4</button>
+          <button type="button" data-action="digit" data-value="5">5</button>
+          <button type="button" data-action="digit" data-value="6">6</button>
 
-    <button type="button" data-action="digit" data-value="0">0</button>
-    <button type="button" data-action="decimal">.</button>
-  </div>
+          <button type="button" data-action="digit" data-value="1">1</button>
+          <button type="button" data-action="digit" data-value="2">2</button>
+          <button type="button" data-action="digit" data-value="3">3</button>
 
-</div>
+          <button type="button" data-action="digit" data-value="0">0</button>
+          <button type="button" data-action="decimal">.</button>
+        </div>
+      </div>
 
-      <!-- Sean: calculator-display and calculator-expression elements. -->
       <!-- Nkheso: operator-pad container and operator/utility buttons. -->
     </main>
   </body>

@@ -1,8 +1,9 @@
 # Proposed calculator interfaces
 
-These conventions come from the team's proposal and should be reviewed together
-before implementation. The foundation reserves the files and documents the
-interfaces; the functions and UI elements have not been implemented yet.
+These conventions come from the team's proposal. The display and expression HTML
+is in place, and the controller implements state, digit entry, operator selection,
+backspace and clear. The remaining controller functions and the input and math
+modules are still planned interfaces.
 
 ## HTML hooks
 
@@ -31,14 +32,44 @@ uses a different visual symbol. Calculator CSS classes use the `calc-` prefix.
 
 ### Sean: `js/calculator.js`
 
-Export the following controller functions:
+Implemented controller functions:
 
+- `getCalculatorState()` returns a copy of the current state.
 - `handleDigit(digit)`
 - `handleOperator(operator)`
+- `backspace()`
+- `clearCalculator()`
+
+All handlers return an updated state snapshot. The initial state, also restored
+by clear, is:
+
+```json
+{
+  "currentInput": "0",
+  "firstOperand": null,
+  "operator": null,
+  "waitingForNextOperand": false
+}
+```
+
+Digit entry accepts a single digit as a string or number, replaces the initial
+zero and ignores invalid input. Snapshots can be read or modified by callers
+without changing the controller's internal state. DOM updates will be connected
+during integration.
+
+Operator selection accepts `+`, `-`, `*` and `/`, stores the first operand as a
+number and waits for the next operand. The next digit starts a fresh input.
+Selecting another operator before entering that operand replaces the operator.
+Chained calculations will be added with math integration; until then, an operator
+pressed after entering the second operand leaves the pending calculation intact.
+
+Backspace removes the last digit from the current input, falling back to `'0'`.
+While waiting for the next operand, it leaves the stored first operand unchanged.
+
+Remaining planned controller functions:
+
 - `handleEquals()`
 - `handleDecimal()`
-- `clearCalculator()`
-- `backspace()`
 
 Own calculator state, operands, operators, chained calculations, equals, clear
 and backspace logic. Catch division-by-zero errors and display a snarky error
