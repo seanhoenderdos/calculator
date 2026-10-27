@@ -5,6 +5,8 @@ const initialState = {
   waitingForNextOperand: false,
 };
 
+const validOperators = ['+', '-', '*', '/'];
+
 let calculatorState = { ...initialState };
 
 export function getCalculatorState() {
@@ -25,10 +27,44 @@ export function handleDigit(digit) {
 
   // Keep input as text to preserve digits until a calculation is requested.
   calculatorState.currentInput =
+    calculatorState.waitingForNextOperand ||
     calculatorState.currentInput === '0'
       ? digitText
       : calculatorState.currentInput + digitText;
+  calculatorState.waitingForNextOperand = false;
 
+  return getCalculatorState();
+}
+
+export function handleOperator(operator) {
+  if (!validOperators.includes(operator)) {
+    return getCalculatorState();
+  }
+
+  if (
+    calculatorState.operator !== null &&
+    !calculatorState.waitingForNextOperand
+  ) {
+    // Preserve the pending calculation until chained calculations are added.
+    return getCalculatorState();
+  }
+
+  if (!calculatorState.waitingForNextOperand) {
+    calculatorState.firstOperand = Number(calculatorState.currentInput);
+  }
+
+  calculatorState.operator = operator;
+  calculatorState.waitingForNextOperand = true;
+  return getCalculatorState();
+}
+
+export function backspace() {
+  if (calculatorState.waitingForNextOperand) {
+    return getCalculatorState();
+  }
+
+  calculatorState.currentInput =
+    calculatorState.currentInput.slice(0, -1) || '0';
   return getCalculatorState();
 }
 
