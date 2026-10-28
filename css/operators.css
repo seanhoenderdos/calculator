@@ -1,1 +1,75 @@
 /* Nkheso: operator and utility button styling. Use calc- classes. */
+
+#operator-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.calc-operator,
+.calc-utility {
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #dcdfe3;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.2s ease;
+}
+
+.calc-operator {
+  background-color: #5b6470;
+  border-color: #5b6470;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(91, 100, 112, 0.2);
+}
+
+.calc-operator:hover {
+  background-color: #454d57;
+  border-color: #454d57;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(91, 100, 112, 0.3);
+}
+
+.calc-utility {
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+.calc-utility:hover {
+  background-color: #d1d5db;
+}
+
+.calc-utility[data-action='equals'] {
+  background-color: #1f2937;
+  border-color: #1f2937;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(31, 41, 55, 0.3);
+}
+
+.calc-utility[data-action='equals']:hover {
+  background-color: #374151;
+  border-color: #374151;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(31, 41, 55, 0.4);
+}
+
+.calc-operator:active,
+.calc-utility:active {
+  transform: scale(0.97) translateY(0);
+  box-shadow: none;
+}
+
+.calc-operator:focus-visible,
+.calc-utility:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
