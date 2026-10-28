@@ -11,45 +11,23 @@
   </head>
   <body>
     <main class="calc-app">
-      <div class="calc-layout">
-        <div class="calc-screen">
-          <p id="calculator-expression" class="calc-expression"></p>
-          <output
-            id="calculator-display"
-            class="calc-display"
-            aria-label="Current value"
-            >0</output
-          >
-        </div>
-
-        <div id="number-pad" class="calc-number-pad">
-          <button type="button" data-action="digit" data-value="7">7</button>
-          <button type="button" data-action="digit" data-value="8">8</button>
-          <button type="button" data-action="digit" data-value="9">9</button>
-
-          <button type="button" data-action="digit" data-value="4">4</button>
-          <button type="button" data-action="digit" data-value="5">5</button>
-          <button type="button" data-action="digit" data-value="6">6</button>
-
-          <button type="button" data-action="digit" data-value="1">1</button>
-          <button type="button" data-action="digit" data-value="2">2</button>
-          <button type="button" data-action="digit" data-value="3">3</button>
-
-          <button type="button" data-action="digit" data-value="0">0</button>
-          <button type="button" data-action="decimal">.</button>
-        </div>
+      <div class="calc-screen">
+        <p id="calculator-expression" class="calc-expression"></p>
+        <output
+          id="calculator-display"
+          class="calc-display"
+          aria-label="Current value"
+          >0</output
+        >
       </div>
 
-      <div id="operator-pad" class="calc-operator-pad">
-        <button type="button" class="calc-utility" data-action="clear">
-          Clear
-        </button>
-        <button type="button" class="calc-utility" data-action="backspace">
-          ⌫
+      <div class="calc-keypad">
+        <button type="button" class="btn-utility span-2" data-action="clear">
+          AC
         </button>
         <button
           type="button"
-          class="calc-operator"
+          class="btn-operator"
           data-action="operator"
           data-value="/"
         >
@@ -57,31 +35,123 @@
         </button>
         <button
           type="button"
-          class="calc-operator"
+          class="btn-operator"
           data-action="operator"
           data-value="*"
         >
           ×
         </button>
+
         <button
           type="button"
-          class="calc-operator"
-          data-action="operator"
-          data-value="-"
+          class="btn-digit"
+          data-action="digit"
+          data-value="7"
         >
-          -
+          7
         </button>
         <button
           type="button"
-          class="calc-operator"
+          class="btn-digit"
+          data-action="digit"
+          data-value="8"
+        >
+          8
+        </button>
+        <button
+          type="button"
+          class="btn-digit"
+          data-action="digit"
+          data-value="9"
+        >
+          9
+        </button>
+        <button
+          type="button"
+          class="btn-operator"
+          data-action="operator"
+          data-value="-"
+        >
+          −
+        </button>
+
+        <button
+          type="button"
+          class="btn-digit"
+          data-action="digit"
+          data-value="4"
+        >
+          4
+        </button>
+        <button
+          type="button"
+          class="btn-digit"
+          data-action="digit"
+          data-value="5"
+        >
+          5
+        </button>
+        <button
+          type="button"
+          class="btn-digit"
+          data-action="digit"
+          data-value="6"
+        >
+          6
+        </button>
+        <button
+          type="button"
+          class="btn-operator"
           data-action="operator"
           data-value="+"
         >
           +
         </button>
 
-        <button type="button" class="calc-utility" data-action="equals">
+        <button
+          type="button"
+          class="btn-digit"
+          data-action="digit"
+          data-value="1"
+        >
+          1
+        </button>
+        <button
+          type="button"
+          class="btn-digit"
+          data-action="digit"
+          data-value="2"
+        >
+          2
+        </button>
+        <button
+          type="button"
+          class="btn-digit"
+          data-action="digit"
+          data-value="3"
+        >
+          3
+        </button>
+
+        <button
+          type="button"
+          class="btn-equals span-vertical"
+          data-action="equals"
+        >
           =
+        </button>
+
+        <button
+          type="button"
+          class="btn-digit"
+          data-action="digit"
+          data-value="0"
+        >
+          0
+        </button>
+        <button type="button" class="btn-digit" data-action="decimal">.</button>
+        <button type="button" class="btn-utility" data-action="backspace">
+          ⌫
         </button>
       </div>
     </main>
