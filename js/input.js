@@ -1,6 +1,3 @@
-// Nourhan: button events, keyboard input and DOM display updates.
-// Implement and export the input functions documented in docs/interfaces.md.
-
 /* Nourhan: button events, keyboard input and DOM display updates. */
 
 export function updateDisplay(value) {
@@ -40,9 +37,14 @@ export function setupCalculatorInput(handlers) {
     updateFromState(state);
   }
 
-  // Handle calculator button clicks.
   document.addEventListener('click', (event) => {
-    const button = event.target.closest('button[data-action]');
+    const target = event.target;
+
+    if (!(target instanceof Element)) {
+      return;
+    }
+
+    const button = target.closest('button[data-action]');
 
     if (!button) {
       return;
@@ -51,7 +53,6 @@ export function setupCalculatorInput(handlers) {
     runHandler(button.dataset.action, button.dataset.value);
   });
 
-  // Handle keyboard input.
   document.addEventListener('keydown', (event) => {
     if (
       event.ctrlKey ||

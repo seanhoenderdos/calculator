@@ -2,40 +2,89 @@
 body {
   min-height: 100vh;
   margin: 0;
+  padding: 24px 16px;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #f1f3f5;
+  font-family: Roboto, Arial, sans-serif;
 }
 
 /* Calculator box */
 .calc-app {
-  width: 320px;
-  max-width: calc(100% - 32px);
+  width: 340px;
+  max-width: 100%;
   padding: 20px;
   box-sizing: border-box;
   background-color: #ffffff;
   border: 1px solid #dcdfe3;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgb(0 0 0 / 10%);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 10%);
 }
 
 /* Arrange calculator sections vertically */
 .calc-layout {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
-/* Arrange number buttons in three columns */
+/* Arrange number buttons in three equal columns */
 #number-pad {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
 }
 
+/* Number keypad buttons */
 #number-pad button {
-  min-height: 48px;
+  min-width: 0;
+  min-height: 52px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #dfe3e8;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  color: #212529;
+  font-family: inherit;
   font-size: 1.2rem;
+  font-weight: 500;
   cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+/* Hover and press feedback */
+#number-pad button:hover {
+  background-color: #e9ecef;
+  border-color: #cbd2d9;
+}
+
+#number-pad button:active {
+  transform: scale(0.97);
+}
+
+/* Visible keyboard focus */
+#number-pad button:focus-visible {
+  outline: 3px solid #80bdff;
+  outline-offset: 2px;
+}
+
+/* Smaller screens */
+@media (max-width: 360px) {
+  .calc-app {
+    padding: 16px;
+  }
+
+  #number-pad {
+    gap: 8px;
+  }
+
+  #number-pad button {
+    min-height: 46px;
+    font-size: 1.1rem;
+  }
 }
