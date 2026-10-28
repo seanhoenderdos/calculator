@@ -1,4 +1,4 @@
-import { operate, formatResult } from './math.js';
+import { operate, formatResult, canAddDecimal } from './math.js';
 
 const initialState = {
   currentInput: '0',
@@ -78,6 +78,23 @@ export function handleDigit(digit) {
       ? digitText
       : calculatorState.currentInput + digitText;
   calculatorState.waitingForNextOperand = false;
+
+  return getCalculatorState();
+}
+
+export function handleDecimal() {
+  if (calculatorState.hasError) {
+    clearCalculator();
+  }
+
+  if (calculatorState.waitingForNextOperand) {
+    calculatorState.currentInput = '0';
+    calculatorState.waitingForNextOperand = false;
+  }
+
+  if (canAddDecimal(calculatorState.currentInput)) {
+    calculatorState.currentInput += '.';
+  }
 
   return getCalculatorState();
 }
