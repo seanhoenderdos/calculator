@@ -2,8 +2,8 @@
 
 These conventions come from the team's proposal. The display and expression HTML
 is in place, and the controller implements state, digit entry, operator selection,
-backspace and clear. The remaining controller functions and the input and math
-modules are still planned interfaces.
+equals, chained calculations, error handling, backspace and clear. The math module
+is implemented. Decimal entry and the input module are still planned interfaces.
 
 ## HTML hooks
 
@@ -37,6 +37,7 @@ Implemented controller functions:
 - `getCalculatorState()` returns a copy of the current state.
 - `handleDigit(digit)`
 - `handleOperator(operator)`
+- `handleEquals()`
 - `backspace()`
 - `clearCalculator()`
 
@@ -48,7 +49,8 @@ by clear, is:
   "currentInput": "0",
   "firstOperand": null,
   "operator": null,
-  "waitingForNextOperand": false
+  "waitingForNextOperand": false,
+  "hasError": false
 }
 ```
 
@@ -60,15 +62,28 @@ during integration.
 Operator selection accepts `+`, `-`, `*` and `/`, stores the first operand as a
 number and waits for the next operand. The next digit starts a fresh input.
 Selecting another operator before entering that operand replaces the operator.
-Chained calculations will be added with math integration; until then, an operator
-pressed after entering the second operand leaves the pending calculation intact.
+Selecting an operator after entering the second operand calculates the current
+pair and uses the result as the next first operand. Chained calculations run from
+left to right.
+
+Equals completes a pending operation using the math module's `operate` and
+`formatResult` functions. It leaves the current input unchanged when there is no
+operator or no second operand yet. After a result, a digit starts a fresh entry,
+while an operator continues with that result. Repeated equals leaves the result
+unchanged.
+
+Calculation errors return a snapshot with `hasError: true`, the error message in
+`currentInput`, and no pending operand or operator. Division-by-zero messages come
+from the math module; out-of-range calculations also produce an error message.
+Clear, backspace or a valid digit recovers from the error. Other operators and
+equals leave the error message visible until recovery.
 
 Backspace removes the last digit from the current input, falling back to `'0'`.
 While waiting for the next operand, it leaves the stored first operand unchanged.
+It also leaves a completed result unchanged until a fresh entry starts.
 
 Remaining planned controller functions:
 
-- `handleEquals()`
 - `handleDecimal()`
 
 Own calculator state, operands, operators, chained calculations, equals, clear
@@ -89,20 +104,20 @@ keys: `handleDigit`, `handleOperator`, `handleEquals`, `handleDecimal`,
 
 ### Nkheso: `js/math.js`
 
-Export the following mathematical functions:
+The math module exports the following functions:
 
 - `add(a, b)`
 - `subtract(a, b)`
 - `multiply(a, b)`
 - `divide(a, b)`
 - `operate(operator, a, b)` returns the calculation result.
-- `formatResult(value)` formats long decimal results.
+- `formatResult(value)` returns a number rounded to 10 significant digits.
 - `canAddDecimal(currentInput)` returns `true` or `false`.
 
 Division by zero throws an error for the controller to catch.
 
 Math functions can be tested in the browser console using a dynamic module import
-once implemented (while serving the project over HTTP):
+while serving the project over HTTP:
 
 ```js
 const math = await import('./js/math.js');
@@ -115,6 +130,6 @@ This is the module entry point loaded by `index.html`. Connect the implemented
 modules here during integration. Keep the public function names coordinated;
 additional internal helper functions are welcome.
 
-Before integration, agree on the remaining details, including the return type of
-`formatResult`, how controller state reaches `updateDisplay`, and how the optional
-expression display is updated.
+During integration, pass the controller snapshot's `currentInput` to
+`updateDisplay(value)`. The optional expression display's update interface still
+needs to be coordinated.
