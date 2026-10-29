@@ -1,1 +1,18 @@
-// Shared entry point: connect the modules here once their features are ready.
+import {
+  backspace,
+  clearCalculator,
+  handleDecimal,
+  handleDigit,
+  handleEquals,
+  handleOperator,
+} from './calculator.js';
+import { setupCalculatorInput } from './input.js';
+
+setupCalculatorInput({
+  handleDigit,
+  handleOperator,
+  handleEquals,
+  handleDecimal,
+  clearCalculator,
+  backspace,
+});
