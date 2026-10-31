@@ -54,12 +54,16 @@ export function setupCalculatorInput(handlers) {
   });
 
   document.addEventListener('keydown', (event) => {
+    const target = event.target;
+
     if (
+      !(target instanceof Element) ||
       event.ctrlKey ||
       event.metaKey ||
       event.altKey ||
-      event.target.isContentEditable ||
-      ['INPUT', 'TEXTAREA', 'SELECT'].includes(event.target.tagName)
+      target.isContentEditable ||
+      ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName) ||
+      target.closest('button')
     ) {
       return;
     }

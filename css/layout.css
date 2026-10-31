@@ -46,7 +46,11 @@ body {
   transition:
     opacity 0.15s ease,
     transform 0.1s ease;
-  outline: none;
+}
+
+.calc-keypad button:focus-visible {
+  outline: 3px solid #80bdff;
+  outline-offset: 3px;
 }
 
 .calc-keypad button.span-2 {
