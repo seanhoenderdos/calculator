@@ -1,19 +1,41 @@
 /* Nourhan: button events, keyboard input and DOM display updates. */
 
-export function updateDisplay(value) {
+export function updateDisplay(state) {
   const display = document.getElementById('calculator-display');
+  const expressionEl = document.getElementById('calculator-expression');
 
   if (!display) {
     return;
   }
 
-  display.textContent = String(value);
+  if (expressionEl) {
+    expressionEl.textContent = state.expressionHistory ?? '';
+  }
+
+  // While the user is actively building an expression, show it in the main
+  // display. After equals (or on error) fall back to currentInput.
+  const showExpression =
+    !state.hasError && state.expression && state.expression.trim() !== '';
+
+  const text = showExpression
+    ? state.expression.trim()
+    : String(state.currentInput);
+
+  display.textContent = text;
+
+  // Always start at max size, then shrink proportionally only if the text
+  // overflows the container — so text fills as much width as possible.
+  display.style.fontSize = '2rem';
+  if (display.scrollWidth > display.clientWidth) {
+    const scale = display.clientWidth / display.scrollWidth;
+    display.style.fontSize = `${(2 * scale).toFixed(3)}rem`;
+  }
 }
 
 export function setupCalculatorInput(handlers) {
   function updateFromState(state) {
     if (state && 'currentInput' in state) {
-      updateDisplay(state.currentInput);
+      updateDisplay(state);
     }
   }
 

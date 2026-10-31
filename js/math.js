@@ -13,7 +13,7 @@ export function multiply(a, b) {
 
 export function divide(a, b) {
   if (b === 0) {
-    throw new Error("Nice try! You can't divide by zero.");
+    throw new Error('cannot ÷ by 0');
   }
 
   return a / b;
@@ -39,7 +39,8 @@ export function formatResult(value) {
     return value;
   }
 
-  return Number(value.toPrecision(10));
+  // Round to 4 decimal places, then strip trailing zeros via Number().
+  return Number(value.toFixed(4));
 }
 
 export function canAddDecimal(currentInput) {

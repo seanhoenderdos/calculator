@@ -10,6 +10,16 @@
   overflow-wrap: anywhere;
 }
 
+.calc-expression {
+  display: block;
+  min-height: 1.2em;
+  color: #6c757d;
+  font-size: 0.9rem;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
 .calc-display {
   display: block;
   color: #212529;
@@ -17,4 +27,6 @@
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
 }
