@@ -146,8 +146,9 @@ export function backspace() {
     return getCalculatorState();
   }
 
+  const shortenedInput = calculatorState.currentInput.slice(0, -1);
   calculatorState.currentInput =
-    calculatorState.currentInput.slice(0, -1) || '0';
+    shortenedInput === '' || shortenedInput === '-' ? '0' : shortenedInput;
   return getCalculatorState();
 }
 

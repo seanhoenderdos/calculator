@@ -1,4 +1,4 @@
-/* Sean: calculator display and expression styling. */
+/* Sean: calculator display styling. */
 .calc-screen {
   min-width: 0;
   padding: 12px;
@@ -8,14 +8,6 @@
   font-family: Arial, sans-serif;
   text-align: right;
   overflow-wrap: anywhere;
-}
-
-.calc-expression {
-  min-height: 1.25rem;
-  margin: 0 0 4px;
-  color: #5b6470;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
 }
 
 .calc-display {
